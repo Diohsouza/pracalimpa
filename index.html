@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Life - Acompanhamento de Processo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #8b5cf6;
+            --accent: #0ea5e9;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --light: #f8fafc;
+            --light-gray: #e2e8f0;
+            --dark: #0f172a;
+            --dark-gray: #64748b;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            padding: 40px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+        }
+        
+        .glass-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 40px 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .logo-icon i {
+            font-size: 28px;
+            color: white;
+        }
+        
+        .logo-text {
+            text-align: left;
+        }
+        
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin: 0 auto 25px;
+        }
+        
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 15px;
+            padding-left: 5px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            font-size: 16px;
+            background: white;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+        
+        input:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        button {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--dark-gray), #94a3b8);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 20px rgba(100, 116, 139, 0.3);
+        }
+        
+        .status-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .status-info {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .status-info-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .status-info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .message-icon {
+            background: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .message-icon i {
+            color: white;
+            font-size: 22px;
+        }
+        
+        .status-message {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--dark);
+        }
+        
+        .progress-container {
+            margin: 40px 0;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .progress-bar-bg {
+            background: var(--light-gray);
+            border-radius: 10px;
+            height: 18px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+        }
+        
+        .progress-percent {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .tela {
+            display: none;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .confidential {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fef2f2;
+            color: var(--error);
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin: 15px 0 25px;
+            font-size: 14px;
+        }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .tag-waiting {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        
+        .tag-progress {
+            background: #dbeafe;
+            color: var(--primary-dark);
+        }
+        
+        .tag-completed {
+            background: #dcfce7;
+            color: #047857;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--dark-gray);
+            font-size: 14px;
+            padding: 20px 0;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .status-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .glass-card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .glass-card {
+                padding: 25px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tela 1: Entrada de Dados -->
+        <div id="tela-entrada" class="tela active">
+            <header>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Praça Limpa</h1>
+                        <p class="subtitle">Consultoria Financeira | Soluções para Limpeza de Nome</p>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="glass-card animate-in">
+                <h2>Informações do Processo</h2>
+                <p class="confidential animate-in delay-1">
+                    <i class="fas fa-lock"></i> Todos os dados são tratados com total sigilo e segurança
+                </p>
+                
+                <form id="form-processo">
+                    <div class="form-group animate-in delay-1">
+                        <label for="nome">Nome / Razão Social</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="nome" required placeholder="Digite o nome ou razão social">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group animate-in delay-2">
+                        <label for="data-inicio">Informe um dia antes do inicio</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-calendar-alt"></i>
+                            <input type="date" id="data-inicio" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group animate-in delay-3">
+                        <label for="prazo">Prazo de Conclusão</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-clock"></i>
+                            <select id="prazo" required>
+                                <option value="">Selecione o prazo</option>
+                                <option value="20">20 dias úteis</option>
+                                <option value="40">40 dias úteis</option>
+                                <option value="60">60 dias úteis</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="btn-verificar" class="animate-in delay-3">
+                        <i class="fas fa-search"></i> Verificar Status
+                    </button>
+                </form>
+            </div>
+            
+            <footer>
+                <p>© 2025 New Life Consultoria Financeira. Todos os direitos reservados.</p>
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Sistema seguro e confidencial - Nenhum dado sensível é exibido</span>
+                </div>
+            </footer>
+        </div>
+        
+        <!-- Tela 2: Status do Processo -->
+        <div id="tela-status" class="tela">
+            <header>
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Acompanhamento de Processo</h1>
+                        <p class="subtitle">Acompanhe o andamento do seu processo de forma segura</p>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="glass-card">
+                <div class="status-card">
+                    <div class="status-info animate-in">
+                        <div class="status-info-item">
+                            <div class="info-label">
+                                <i class="fas fa-user"></i>
+                                Nome/Razão Social
+                            </div>
+                            <div class="info-value" id="status-nome"></div>
+                        </div>
+                        
+                        <div class="status-info-item">
+                            <div class="info-label">
+                                <i class="fas fa-calendar-alt"></i>
+                                Data de Início
+                            </div>
+                            <div class="info-value" id="status-data-inicio"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-info animate-in delay-1">
+                        <div class="status-info-item">
+                            <div class="info-label">
+                                <i class="fas fa-business-time"></i>
+                                Dias úteis transcorridos
+                            </div>
+                            <div class="info-value" id="dias-transcorridos"></div>
+                            <div class="tag" id="status-tag"></div>
+                        </div>
+                        
+                        <div class="status-info-item">
+                            <div class="info-label">
+                                <i class="fas fa-hourglass-half"></i>
+                                Status do Processo
+                            </div>
+                            <div class="info-value" id="status-geral"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message-box animate-in delay-2">
+                    <div class="message-header">
+                        <div class="message-icon">
+                            <i class="fas fa-comment-alt"></i>
+                        </div>
+                        <h3>Setor Jurídico:</h3>
+                    </div>
+                    <p class="status-message" id="mensagem-andamento"></p>
+                </div>
+                
+                <div class="progress-container animate-in delay-3">
+                    <div class="progress-header">
+                        <div class="info-label">
+                            <i class="fas fa-chart-line"></i>
+                            Progresso do Processo
+                        </div>
+                        <div class="progress-percent" id="progress-text">0%</div>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+                
+                <button id="btn-voltar" class="btn-secondary animate-in delay-3">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                </button>
+            </div>
+            
+            <footer>
+                <p>© 2025 New Life Consultoria Financeira. Processo em andamento.</p>
+                <div class="security-badge">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>Atualizado automaticamente - Consulte regularmente para acompanhar o progresso</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Lista de feriados nacionais (formato YYYY-MM-DD)
+        const feriados = [
+            '2025-01-01', '2025-04-21', '2025-05-01', '2025-09-07',
+            '2025-10-12', '2025-11-02', '2025-11-15', '2025-12-25',
+            '2025-03-04', '2025-04-18', '2025-06-19'
+        ];
+        
+        // Referências aos elementos do DOM
+        const telaEntrada = document.getElementById('tela-entrada');
+        const telaStatus = document.getElementById('tela-status');
+        const formProcesso = document.getElementById('form-processo');
+        const btnVoltar = document.getElementById('btn-voltar');
+        
+        // Elementos da tela de status
+        const statusNome = document.getElementById('status-nome');
+        const statusDataInicio = document.getElementById('status-data-inicio');
+        const diasTranscorridos = document.getElementById('dias-transcorridos');
+        const mensagemAndamento = document.getElementById('mensagem-andamento');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const statusTag = document.getElementById('status-tag');
+        const statusGeral = document.getElementById('status-geral');
+        
+        // Função para calcular dias úteis entre duas datas
+        function calcularDiasUteis(dataInicio, dataFim) {
+            const start = new Date(dataInicio);
+            const end = new Date(dataFim);
+            let count = 0;
+            
+            start.setHours(0, 0, 0, 0);
+            end.setHours(0, 0, 0, 0);
+            
+            if (start > end) return 0;
+            
+            const current = new Date(start);
+            
+            while (current <= end) {
+                const dayOfWeek = current.getDay();
+                const dateStr = formatarData(current);
+                
+                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                    if (!feriados.includes(dateStr)) {
+                        count++;
+                    }
+                }
+                
+                current.setDate(current.getDate() + 1);
+            }
+            
+            return count;
+        }
+        
+        // Função para formatar data como YYYY-MM-DD
+        function formatarData(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // Função para obter a mensagem de andamento
+        function obterMensagemAndamento(diasTranscorridos, prazo) {
+            if (diasTranscorridos <= 0) {
+                return "Processo ainda não iniciado. Aguarde o início na data informada.";
+            }
+            
+            switch(parseInt(prazo)) {
+                case 20:
+                    if (diasTranscorridos <= 5) 
+                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial é crucial para garantir que seu caso seja direcionado ao profissional adequado.";
+                    if (diasTranscorridos <= 19) 
+                        return "Processo em andamento, aguardando análise detalhada do Juiz. Nossa equipe está monitorando ativamente para garantir que tudo prossiga conforme planejado.";
+                    if (diasTranscorridos >= 20) 
+                        return "Decisão Favorável! Parabéns, seu processo foi finalizado com sucesso. Estamos disponíveis para auxiliar nos próximos passos.";
+                    break;
+                    
+                case 40:
+                    if (diasTranscorridos <= 5) 
+                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial é essencial para o direcionamento adequado do seu caso.";
+                    if (diasTranscorridos <= 19) 
+                        return "Processo em andamento, aguardando análise detalhada do Juiz. Nossa equipe está acompanhando atentamente cada etapa.";
+                    if (diasTranscorridos <= 21) 
+                        return "Taxas de liberação já foram autorizadas! Estamos aguardando seu pagamento para dar continuidade ao processo.";
+                    if (diasTranscorridos <= 39) 
+                        return "Pagamento da 2ª parcela confirmado. Estamos aguardando a liberação total do processo junto ao tribunal.";
+                    if (diasTranscorridos >= 40) 
+                        return "Decisão Favorável! Seu processo foi concluído com sucesso. Entre em contato para conhecer os próximos passos.";
+                    break;
+                    
+                case 60:
+                    if (diasTranscorridos <= 5) 
+                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial garante que seu caso seja tratado pelo profissional mais adequado.";
+                    if (diasTranscorridos <= 39) 
+                        return "Processo em andamento, aguardando análise detalhada do Juiz. Estamos monitorando ativamente para garantir o melhor resultado.";
+                    if (diasTranscorridos <= 41) 
+                        return "Taxas de liberação já foram autorizadas! Estamos aguardando seu pagamento para prosseguir com a fase final do processo.";
+                    if (diasTranscorridos <= 59) 
+                        return "Pagamento da 2ª parcela confirmado. Estamos aguardando a liberação total do processo junto ao tribunal para finalização.";
+                    if (diasTranscorridos >= 60) 
+                        return "Decisão Favorável! Parabéns, seu processo foi finalizado com sucesso. Estamos à disposição para auxiliar nas próximas etapas.";
+                    break;
+                    
+                default:
+                    return "Processo em análise. Aguarde atualizações em breve.";
+            }
+        }
+        
+        // Função para atualizar a barra de progresso
+        function atualizarBarraProgresso(diasTranscorridos, prazo) {
+            let percentual = (diasTranscorridos / prazo) * 100;
+            
+            if (percentual > 100) percentual = 100;
+            
+            progressBar.style.width = percentual + '%';
+            progressText.textContent = Math.round(percentual) + '%';
+        }
+        
+        // Função para atualizar a tag de status
+        function atualizarStatusTag(diasTranscorridos, prazo) {
+            if (diasTranscorridos <= 0) {
+                statusTag.textContent = 'Aguardando início';
+                statusTag.className = 'tag tag-waiting';
+                statusGeral.textContent = 'Não Iniciado';
+            } else if (diasTranscorridos < prazo) {
+                statusTag.textContent = 'Em andamento';
+                statusTag.className = 'tag tag-progress';
+                statusGeral.textContent = 'Em Progresso';
+            } else {
+                statusTag.textContent = 'Concluído';
+                statusTag.className = 'tag tag-completed';
+                statusGeral.textContent = 'Finalizado';
+            }
+        }
+        
+        // Evento de envio do formulário
+        formProcesso.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obter valores do formulário
+            const nome = document.getElementById('nome').value;
+            const dataInicio = document.getElementById('data-inicio').value;
+            const prazo = document.getElementById('prazo').value;
+            
+            // Calcular dias úteis transcorridos
+            const hoje = new Date();
+            const dias = calcularDiasUteis(dataInicio, hoje);
+            
+            // Atualizar tela de status
+            statusNome.textContent = nome;
+            statusDataInicio.textContent = new Date(dataInicio).toLocaleDateString('pt-BR');
+            diasTranscorridos.textContent = `${dias} de ${prazo} dias úteis`;
+            mensagemAndamento.textContent = obterMensagemAndamento(dias, prazo);
+            
+            // Atualizar barra de progresso e tag
+            atualizarBarraProgresso(dias, prazo);
+            atualizarStatusTag(dias, prazo);
+            
+            // Animação de entrada
+            document.querySelectorAll('#tela-status .animate-in').forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            // Alternar telas
+            telaEntrada.classList.remove('active');
+            telaStatus.classList.add('active');
+            
+            // Animar elementos da nova tela
+            setTimeout(() => {
+                document.querySelectorAll('#tela-status .animate-in').forEach(el => {
+                    el.style.animation = 'fadeIn 0.6s ease forwards';
+                });
+            }, 10);
+        });
+        
+        // Evento do botão Voltar
+        btnVoltar.addEventListener('click', function() {
+            // Limpar formulário
+            formProcesso.reset();
+            
+            // Animação de entrada
+            document.querySelectorAll('#tela-entrada .animate-in').forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            // Alternar telas
+            telaStatus.classList.remove('active');
+            telaEntrada.classList.add('active');
+            
+            // Animar elementos da tela inicial
+            setTimeout(() => {
+                document.querySelectorAll('#tela-entrada .animate-in').forEach(el => {
+                    el.style.animation = 'fadeIn 0.6s ease forwards';
+                });
+            }, 10);
+        });
+        
+        // Configurar data mínima e máxima para o campo de data
+        const dataInicioInput = document.getElementById('data-inicio');
+        const hoje = new Date();
+        const maxDate = new Date();
+        maxDate.setFullYear(hoje.getFullYear() + 1);
+        
+        dataInicioInput.min = '2020-01-01';
+        dataInicioInput.max = formatarData(maxDate);
+        dataInicioInput.value = formatarData(new Date());
+        
+        // Animação inicial
+        setTimeout(() => {
+            document.querySelectorAll('.animate-in').forEach(el => {
+                el.style.animation = 'fadeIn 0.6s ease forwards';
+            });
+        }, 100);
+    </script>
+</body>
+</html>
