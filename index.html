@@ -1,815 +1,433 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Life - Acompanhamento de Processo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #8b5cf6;
-            --accent: #0ea5e9;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --light: #f8fafc;
-            --light-gray: #e2e8f0;
-            --dark: #0f172a;
-            --dark-gray: #64748b;
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            padding: 40px;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: var(--transition);
-        }
-        
-        .glass-card:hover {
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 40px 0 20px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .logo-icon {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-        }
-        
-        .logo-icon i {
-            font-size: 28px;
-            color: white;
-        }
-        
-        .logo-text {
-            text-align: left;
-        }
-        
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 2.8rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: var(--dark-gray);
-            letter-spacing: 0.5px;
-            max-width: 600px;
-            margin: 0 auto 25px;
-        }
-        
-        h2 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 1.8rem;
-            color: var(--primary-dark);
-            margin-bottom: 30px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        .form-group i {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            font-size: 18px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: var(--dark);
-            font-size: 15px;
-            padding-left: 5px;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 16px 20px 16px 50px;
-            border: 1px solid var(--light-gray);
-            border-radius: 12px;
-            font-size: 16px;
-            background: white;
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
-        }
-        
-        input:focus, select:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
-        }
-        
-        button {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 18px 30px;
-            font-size: 17px;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-        }
-        
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
-        }
-        
-        button:active {
-            transform: translateY(0);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(90deg, var(--dark-gray), #94a3b8);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 8px 20px rgba(100, 116, 139, 0.3);
-        }
-        
-        .status-card {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .status-info {
-            background: var(--light);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .status-info-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .status-info-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        
-        .info-label {
-            font-size: 14px;
-            color: var(--dark-gray);
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .info-value {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .message-box {
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            border-radius: 16px;
-            padding: 30px;
-            margin: 30px 0;
-            border-left: 4px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        
-        .message-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .message-icon {
-            background: var(--primary);
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .message-icon i {
-            color: white;
-            font-size: 22px;
-        }
-        
-        .status-message {
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--dark);
-        }
-        
-        .progress-container {
-            margin: 40px 0;
-        }
-        
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-        }
-        
-        .progress-bar-bg {
-            background: var(--light-gray);
-            border-radius: 10px;
-            height: 18px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 10px;
-            width: 0%;
-            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-            position: relative;
-        }
-        
-        .progress-percent {
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .tela {
-            display: none;
-        }
-        
-        .active {
-            display: block;
-        }
-        
-        .confidential {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fef2f2;
-            color: var(--error);
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin: 15px 0 25px;
-            font-size: 14px;
-        }
-        
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 8px;
-        }
-        
-        .tag-waiting {
-            background: #fef3c7;
-            color: #d97706;
-        }
-        
-        .tag-progress {
-            background: #dbeafe;
-            color: var(--primary-dark);
-        }
-        
-        .tag-completed {
-            background: #dcfce7;
-            color: #047857;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--dark-gray);
-            font-size: 14px;
-            padding: 20px 0;
-        }
-        
-        .security-badge {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-in {
-            animation: fadeIn 0.6s ease forwards;
-        }
-        
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-        
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .status-card {
-                grid-template-columns: 1fr;
-            }
-            
-            .glass-card {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.6rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .glass-card {
-                padding: 25px 15px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .logo {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo-text {
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assistente de Rapport – New Life</title>
+  <style>
+    :root{
+      --bg:#0b0f14;--card:#111827;--muted:#6b7280;--txt:#eef2ff;--pri:#22c55e;--pri-2:#16a34a;--chip:#0f172a;--accent:#38bdf8;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0b0f14,#0b0f14 40%,#0e1520);color:var(--txt);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:38px;height:38px;border-radius:12px;background:radial-gradient(120% 120% at 20% 20%,#4ade80,transparent 40%),radial-gradient(120% 120% at 80% 20%,#22d3ee,transparent 40%),radial-gradient(120% 120% at 50% 80%,#a78bfa,transparent 40%);box-shadow:0 0 0 2px #111827}
+    h1{font-size:18px;margin:0;font-weight:700;letter-spacing:.2px}
+    .subtitle{font-size:12px;color:var(--muted)}
+    .card{background:linear-gradient(180deg,#0f172a,#0b1220);border:1px solid #122032;border-radius:16px;padding:16px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#0c1220;border:1px solid #1b2a3c;color:#bcd3ff;font-size:12px}
+    .grid{display:grid;gap:10px}
+    @media(min-width:640px){.grid.sm-3{grid-template-columns:repeat(3,1fr)}.grid.sm-4{grid-template-columns:repeat(4,1fr)}.grid.sm-5{grid-template-columns:repeat(5,1fr)}}
+    .btn{border:1px solid #22334a;background:#0c1624;color:#cfe6ff;border-radius:12px;padding:10px 12px;font-weight:600;cursor:pointer;transition:.25s;box-shadow:inset 0 0 0 0 var(--pri)}
+    .btn:hover{transform:translateY(-1px);border-color:#2e4666}
+    .btn.primary{background:linear-gradient(180deg,var(--pri),var(--pri-2));border-color:transparent;color:#05130a}
+    .btn.ghost{background:#0c1220;border-color:#1b2a3c;color:#9fb5d6}
+    .btn.small{padding:7px 10px;border-radius:10px;font-size:12px}
+    .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+    .search{flex:1;min-width:200px}
+    input[type="text"], textarea{width:100%;background:#0b1220;border:1px solid #1b2a3c;border-radius:12px;color:#dbe7ff;padding:10px 12px;outline:none}
+    textarea{min-height:120px;resize:vertical}
+    .muted{color:#92a7c7}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:#0b1220;border:1px solid #203046;color:#cfe6ff;padding:8px 12px;border-radius:999px;font-size:12px;cursor:pointer}
+    .chip.active{background:#10253a;border-color:#2d4f78}
+    .progress{height:8px;border-radius:999px;background:#0b1220;border:1px solid #1b2a3c;overflow:hidden}
+    .progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#60a5fa);width:0%}
+    .cols{display:grid;gap:12px}
+    @media(min-width:900px){.cols{grid-template-columns:1.1fr .9fr}}
+    .section-title{display:flex;align-items:center;justify-content:space-between;margin:6px 0 10px}
+    .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;background:#0b1220;border:1px solid #1b2a3c;border-bottom-color:#122032;border-radius:8px;padding:2px 6px;font-size:11px;color:#9bb8e2}
+    .list{display:flex;flex-direction:column;gap:10px}
+    .item{background:#0b1220;border:1px solid #132235;border-radius:12px;padding:12px}
+    .item h4{margin:0 0 6px 0}
+    .state-grid{display:grid;gap:8px;grid-template-columns:repeat(2,1fr)}
+    @media(min-width:640px){.state-grid{grid-template-columns:repeat(4,1fr)}}
+    .state-btn{padding:10px;border-radius:10px;background:#0c1624;border:1px solid #1b2a3c;cursor:pointer;color:#cfe6ff;text-align:left}
+    .state-btn:hover{border-color:#2a4466}
+    .footer{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+    .tip{font-size:12px;color:#8aa6d4}
+    .badge{display:inline-flex;gap:6px;align-items:center;background:#0c1624;border:1px solid #1b2a3c;border-radius:999px;padding:6px 10px;font-size:12px;color:#bcd3ff}
+    .ghost-sep{border-top:1px dashed #203046;margin:14px 0}
+    .sr{position:absolute;left:-9999px}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Tela 1: Entrada de Dados -->
-        <div id="tela-entrada" class="tela active">
-            <header>
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>Praça Limpa</h1>
-                        <p class="subtitle">Consultoria Financeira | Soluções para Limpeza de Nome</p>
-                    </div>
-                </div>
-            </header>
-            
-            <div class="glass-card animate-in">
-                <h2>Informações do Processo</h2>
-                <p class="confidential animate-in delay-1">
-                    <i class="fas fa-lock"></i> Todos os dados são tratados com total sigilo e segurança
-                </p>
-                
-                <form id="form-processo">
-                    <div class="form-group animate-in delay-1">
-                        <label for="nome">Nome / Razão Social</label>
-                        <div style="position: relative;">
-                            <i class="fas fa-user"></i>
-                            <input type="text" id="nome" required placeholder="Digite o nome ou razão social">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group animate-in delay-2">
-                        <label for="data-inicio">Informe um dia antes do inicio</label>
-                        <div style="position: relative;">
-                            <i class="fas fa-calendar-alt"></i>
-                            <input type="date" id="data-inicio" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group animate-in delay-3">
-                        <label for="prazo">Prazo de Conclusão</label>
-                        <div style="position: relative;">
-                            <i class="fas fa-clock"></i>
-                            <select id="prazo" required>
-                                <option value="">Selecione o prazo</option>
-                                <option value="20">20 dias úteis</option>
-                                <option value="40">40 dias úteis</option>
-                                <option value="60">60 dias úteis</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" id="btn-verificar" class="animate-in delay-3">
-                        <i class="fas fa-search"></i> Verificar Status
-                    </button>
-                </form>
-            </div>
-            
-            <footer>
-                <p>© 2025 New Life Consultoria Financeira. Todos os direitos reservados.</p>
-                <div class="security-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Sistema seguro e confidencial - Nenhum dado sensível é exibido</span>
-                </div>
-            </footer>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Assistente de Rapport – New Life</h1>
+          <div class="subtitle">Guia rápido para ligação: <span class="muted">Estado → Motivo da negativação → Objetivo do cliente</span></div>
         </div>
-        
-        <!-- Tela 2: Status do Processo -->
-        <div id="tela-status" class="tela">
-            <header>
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <div class="logo-text">
-                        <h1>Acompanhamento de Processo</h1>
-                        <p class="subtitle">Acompanhe o andamento do seu processo de forma segura</p>
-                    </div>
-                </div>
-            </header>
-            
-            <div class="glass-card">
-                <div class="status-card">
-                    <div class="status-info animate-in">
-                        <div class="status-info-item">
-                            <div class="info-label">
-                                <i class="fas fa-user"></i>
-                                Nome/Razão Social
-                            </div>
-                            <div class="info-value" id="status-nome"></div>
-                        </div>
-                        
-                        <div class="status-info-item">
-                            <div class="info-label">
-                                <i class="fas fa-calendar-alt"></i>
-                                Data de Início
-                            </div>
-                            <div class="info-value" id="status-data-inicio"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="status-info animate-in delay-1">
-                        <div class="status-info-item">
-                            <div class="info-label">
-                                <i class="fas fa-business-time"></i>
-                                Dias úteis transcorridos
-                            </div>
-                            <div class="info-value" id="dias-transcorridos"></div>
-                            <div class="tag" id="status-tag"></div>
-                        </div>
-                        
-                        <div class="status-info-item">
-                            <div class="info-label">
-                                <i class="fas fa-hourglass-half"></i>
-                                Status do Processo
-                            </div>
-                            <div class="info-value" id="status-geral"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="message-box animate-in delay-2">
-                    <div class="message-header">
-                        <div class="message-icon">
-                            <i class="fas fa-comment-alt"></i>
-                        </div>
-                        <h3>Setor Jurídico:</h3>
-                    </div>
-                    <p class="status-message" id="mensagem-andamento"></p>
-                </div>
-                
-                <div class="progress-container animate-in delay-3">
-                    <div class="progress-header">
-                        <div class="info-label">
-                            <i class="fas fa-chart-line"></i>
-                            Progresso do Processo
-                        </div>
-                        <div class="progress-percent" id="progress-text">0%</div>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar" id="progress-bar"></div>
-                    </div>
-                </div>
-                
-                <button id="btn-voltar" class="btn-secondary animate-in delay-3">
-                    <i class="fas fa-arrow-left"></i> Voltar
-                </button>
-            </div>
-            
-            <footer>
-                <p>© 2025 New Life Consultoria Financeira. Processo em andamento.</p>
-                <div class="security-badge">
-                    <i class="fas fa-sync-alt"></i>
-                    <span>Atualizado automaticamente - Consulte regularmente para acompanhar o progresso</span>
-                </div>
-            </footer>
+      </div>
+      <div class="toolbar">
+        <button class="btn ghost small" id="btnPromptMaster">Prompt mestre</button>
+        <button class="btn primary small" id="btnCopiarResumo">Copiar resumo</button>
+      </div>
+    </header>
+
+    <div class="card" id="wizard">
+      <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+      <div class="toolbar" style="margin-top:12px">
+        <span class="badge">Passo <strong id="stepNum">1</strong>/3</span>
+        <div class="pill">Dica: use <span class="kbd">Ctrl</span> + <span class="kbd">F</span> para achar rápido</div>
+        <div class="search"><input id="search" type="text" placeholder="Pesquisar estado, mania, prato típico, time, festa…"/></div>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button class="btn ghost small" id="prev">◀ Voltar</button>
+          <button class="btn primary small" id="next">Avançar ▶</button>
         </div>
+      </div>
+
+      <div class="cols">
+        <!-- LADO A: INTERAÇÃO -->
+        <section>
+          <div class="section-title">
+            <h3 id="sectionTitle">1) Escolha o estado do cliente</h3>
+          </div>
+
+          <!-- PASSO 1: ESTADOS -->
+          <div id="step1">
+            <div class="state-grid" id="stateGrid"></div>
+            <div class="ghost-sep"></div>
+            <div class="list" id="stateTips"></div>
+          </div>
+
+          <!-- PASSO 2: MOTIVO DA NEGATIVAÇÃO -->
+          <div id="step2" style="display:none">
+            <div class="chips" id="motivosChips"></div>
+            <div class="ghost-sep"></div>
+            <div class="list" id="motivoSugestoes"></div>
+          </div>
+
+          <!-- PASSO 3: OBJETIVO DO CLIENTE -->
+          <div id="step3" style="display:none">
+            <div class="chips" id="objetivosChips"></div>
+            <div class="ghost-sep"></div>
+            <div class="list" id="objetivoSugestoes"></div>
+          </div>
+        </section>
+
+        <!-- LADO B: ROTEIROS & PROMPT GERADO -->
+        <aside>
+          <div class="item">
+            <h4>Resumo da ligação</h4>
+            <div class="muted" id="resumoMini">Nenhuma seleção ainda.</div>
+          </div>
+
+          <div class="item">
+            <h4>Abertura sugerida</h4>
+            <div id="aberturaBox" class="muted">Escolha um estado para ver uma abertura contextualizada.</div>
+          </div>
+
+          <div class="item">
+            <h4>Empatia pelo motivo</h4>
+            <div id="empatiaBox" class="muted">Selecione um motivo para destravar uma frase de empatia verdadeira.</div>
+          </div>
+
+          <div class="item">
+            <h4>Transição para objetivo</h4>
+            <div id="transicaoBox" class="muted">Selecione um objetivo do cliente para uma transição com CTA.</div>
+          </div>
+
+          <div class="item">
+            <h4>Prompt para IA (gerar roteiro completo)</h4>
+            <textarea id="promptIA" readonly></textarea>
+            <div class="footer">
+              <button class="btn ghost small" id="copiarPrompt">Copiar prompt</button>
+              <span class="tip">Cole no ChatGPT para receber um roteiro personalizado em segundos.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
 
-    <script>
-        // Lista de feriados nacionais (formato YYYY-MM-DD)
-        const feriados = [
-            '2025-01-01', '2025-04-21', '2025-05-01', '2025-09-07',
-            '2025-10-12', '2025-11-02', '2025-11-15', '2025-12-25',
-            '2025-03-04', '2025-04-18', '2025-06-19'
-        ];
-        
-        // Referências aos elementos do DOM
-        const telaEntrada = document.getElementById('tela-entrada');
-        const telaStatus = document.getElementById('tela-status');
-        const formProcesso = document.getElementById('form-processo');
-        const btnVoltar = document.getElementById('btn-voltar');
-        
-        // Elementos da tela de status
-        const statusNome = document.getElementById('status-nome');
-        const statusDataInicio = document.getElementById('status-data-inicio');
-        const diasTranscorridos = document.getElementById('dias-transcorridos');
-        const mensagemAndamento = document.getElementById('mensagem-andamento');
-        const progressBar = document.getElementById('progress-bar');
-        const progressText = document.getElementById('progress-text');
-        const statusTag = document.getElementById('status-tag');
-        const statusGeral = document.getElementById('status-geral');
-        
-        // Função para calcular dias úteis entre duas datas
-        function calcularDiasUteis(dataInicio, dataFim) {
-            const start = new Date(dataInicio);
-            const end = new Date(dataFim);
-            let count = 0;
-            
-            start.setHours(0, 0, 0, 0);
-            end.setHours(0, 0, 0, 0);
-            
-            if (start > end) return 0;
-            
-            const current = new Date(start);
-            
-            while (current <= end) {
-                const dayOfWeek = current.getDay();
-                const dateStr = formatarData(current);
-                
-                if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                    if (!feriados.includes(dateStr)) {
-                        count++;
-                    }
-                }
-                
-                current.setDate(current.getDate() + 1);
-            }
-            
-            return count;
-        }
-        
-        // Função para formatar data como YYYY-MM-DD
-        function formatarData(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-        
-        // Função para obter a mensagem de andamento
-        function obterMensagemAndamento(diasTranscorridos, prazo) {
-            if (diasTranscorridos <= 0) {
-                return "Processo ainda não iniciado. Aguarde o início na data informada.";
-            }
-            
-            switch(parseInt(prazo)) {
-                case 20:
-                    if (diasTranscorridos <= 5) 
-                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial é crucial para garantir que seu caso seja direcionado ao profissional adequado.";
-                    if (diasTranscorridos <= 19) 
-                        return "Processo em andamento, aguardando análise detalhada do Juiz. Nossa equipe está monitorando ativamente para garantir que tudo prossiga conforme planejado.";
-                    if (diasTranscorridos >= 20) 
-                        return "Decisão Favorável! Parabéns, seu processo foi finalizado com sucesso. Estamos disponíveis para auxiliar nos próximos passos.";
-                    break;
-                    
-                case 40:
-                    if (diasTranscorridos <= 5) 
-                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial é essencial para o direcionamento adequado do seu caso.";
-                    if (diasTranscorridos <= 19) 
-                        return "Processo em andamento, aguardando análise detalhada do Juiz. Nossa equipe está acompanhando atentamente cada etapa.";
-                    if (diasTranscorridos <= 21) 
-                        return "Taxas de liberação já foram autorizadas! Estamos aguardando seu pagamento para dar continuidade ao processo.";
-                    if (diasTranscorridos <= 39) 
-                        return "Pagamento da 2ª parcela confirmado. Estamos aguardando a liberação total do processo junto ao tribunal.";
-                    if (diasTranscorridos >= 40) 
-                        return "Decisão Favorável! Seu processo foi concluído com sucesso. Entre em contato para conhecer os próximos passos.";
-                    break;
-                    
-                case 60:
-                    if (diasTranscorridos <= 5) 
-                        return "Seu processo está aguardando distribuição ao Juiz responsável. Esta etapa inicial garante que seu caso seja tratado pelo profissional mais adequado.";
-                    if (diasTranscorridos <= 39) 
-                        return "Processo em andamento, aguardando análise detalhada do Juiz. Estamos monitorando ativamente para garantir o melhor resultado.";
-                    if (diasTranscorridos <= 41) 
-                        return "Taxas de liberação já foram autorizadas! Estamos aguardando seu pagamento para prosseguir com a fase final do processo.";
-                    if (diasTranscorridos <= 59) 
-                        return "Pagamento da 2ª parcela confirmado. Estamos aguardando a liberação total do processo junto ao tribunal para finalização.";
-                    if (diasTranscorridos >= 60) 
-                        return "Decisão Favorável! Parabéns, seu processo foi finalizado com sucesso. Estamos à disposição para auxiliar nas próximas etapas.";
-                    break;
-                    
-                default:
-                    return "Processo em análise. Aguarde atualizações em breve.";
-            }
-        }
-        
-        // Função para atualizar a barra de progresso
-        function atualizarBarraProgresso(diasTranscorridos, prazo) {
-            let percentual = (diasTranscorridos / prazo) * 100;
-            
-            if (percentual > 100) percentual = 100;
-            
-            progressBar.style.width = percentual + '%';
-            progressText.textContent = Math.round(percentual) + '%';
-        }
-        
-        // Função para atualizar a tag de status
-        function atualizarStatusTag(diasTranscorridos, prazo) {
-            if (diasTranscorridos <= 0) {
-                statusTag.textContent = 'Aguardando início';
-                statusTag.className = 'tag tag-waiting';
-                statusGeral.textContent = 'Não Iniciado';
-            } else if (diasTranscorridos < prazo) {
-                statusTag.textContent = 'Em andamento';
-                statusTag.className = 'tag tag-progress';
-                statusGeral.textContent = 'Em Progresso';
-            } else {
-                statusTag.textContent = 'Concluído';
-                statusTag.className = 'tag tag-completed';
-                statusGeral.textContent = 'Finalizado';
-            }
-        }
-        
-        // Evento de envio do formulário
-        formProcesso.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Obter valores do formulário
-            const nome = document.getElementById('nome').value;
-            const dataInicio = document.getElementById('data-inicio').value;
-            const prazo = document.getElementById('prazo').value;
-            
-            // Calcular dias úteis transcorridos
-            const hoje = new Date();
-            const dias = calcularDiasUteis(dataInicio, hoje);
-            
-            // Atualizar tela de status
-            statusNome.textContent = nome;
-            statusDataInicio.textContent = new Date(dataInicio).toLocaleDateString('pt-BR');
-            diasTranscorridos.textContent = `${dias} de ${prazo} dias úteis`;
-            mensagemAndamento.textContent = obterMensagemAndamento(dias, prazo);
-            
-            // Atualizar barra de progresso e tag
-            atualizarBarraProgresso(dias, prazo);
-            atualizarStatusTag(dias, prazo);
-            
-            // Animação de entrada
-            document.querySelectorAll('#tela-status .animate-in').forEach(el => {
-                el.style.opacity = '0';
-            });
-            
-            // Alternar telas
-            telaEntrada.classList.remove('active');
-            telaStatus.classList.add('active');
-            
-            // Animar elementos da nova tela
-            setTimeout(() => {
-                document.querySelectorAll('#tela-status .animate-in').forEach(el => {
-                    el.style.animation = 'fadeIn 0.6s ease forwards';
-                });
-            }, 10);
-        });
-        
-        // Evento do botão Voltar
-        btnVoltar.addEventListener('click', function() {
-            // Limpar formulário
-            formProcesso.reset();
-            
-            // Animação de entrada
-            document.querySelectorAll('#tela-entrada .animate-in').forEach(el => {
-                el.style.opacity = '0';
-            });
-            
-            // Alternar telas
-            telaStatus.classList.remove('active');
-            telaEntrada.classList.add('active');
-            
-            // Animar elementos da tela inicial
-            setTimeout(() => {
-                document.querySelectorAll('#tela-entrada .animate-in').forEach(el => {
-                    el.style.animation = 'fadeIn 0.6s ease forwards';
-                });
-            }, 10);
-        });
-        
-        // Configurar data mínima e máxima para o campo de data
-        const dataInicioInput = document.getElementById('data-inicio');
-        const hoje = new Date();
-        const maxDate = new Date();
-        maxDate.setFullYear(hoje.getFullYear() + 1);
-        
-        dataInicioInput.min = '2020-01-01';
-        dataInicioInput.max = formatarData(maxDate);
-        dataInicioInput.value = formatarData(new Date());
-        
-        // Animação inicial
-        setTimeout(() => {
-            document.querySelectorAll('.animate-in').forEach(el => {
-                el.style.animation = 'fadeIn 0.6s ease forwards';
-            });
-        }, 100);
-    </script>
+    <div class="card" id="modalPrompt" style="display:none;position:fixed;inset:10%;z-index:50">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px">
+        <strong>Prompt mestre (edite como quiser)</strong>
+        <button class="btn small ghost" id="fecharModal">Fechar</button>
+      </div>
+      <textarea style="min-height:220px" id="promptMestre"></textarea>
+      <div class="footer">
+        <button class="btn small ghost" id="copiarMestre">Copiar</button>
+        <span class="tip">Use este prompt para gerar variações de scripts, objeções e follow-ups.</span>
+      </div>
+    </div>
+
+    <footer style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
+      <span class="muted">© New Life – Ferramenta de apoio ao consultor</span>
+      <span class="muted">Atalho: <span class="kbd">Alt</span> + <span class="kbd">→</span>/<span class="kbd">←</span> para avançar/voltar</span>
+    </footer>
+  </div>
+
+  <script>
+    // ====== DADOS ======
+    const estados = [
+      {uf:'AC',nome:'Acre', dicas:[
+        'Pergunte se é de Rio Branco ou interior; mencione a BR-364 como referência.','Fale do clima amazônico e do cuidado com cheias.','Mostre interesse por culinária local: tacacá, tambaqui.']},
+      {uf:'AL',nome:'Alagoas', dicas:[
+        'Maceió e o litoral de águas claras são um ótimo gancho.','Maragogi e São Miguel dos Milagres costumam gerar conexão imediata.','Times locais e forró/piseiro rendem papo leve.']},
+      {uf:'AP',nome:'Amapá', dicas:[
+        'Macapá à beira do Equador é um diferencial curioso.','Pergunte sobre a Fortaleza de São José ou balneários.','Mencione respeito à cultura ribeirinha e marabaixo.']},
+      {uf:'AM',nome:'Amazonas', dicas:[
+        'Teatro Amazonas e Encontro das Águas são ganchos elegantes.','Cite o Festival de Parintins (Garantido/Caprichoso).','Valorize a logística e distâncias do estado.']},
+      {uf:'BA',nome:'Bahia', dicas:[
+        'Abra falando da energia de Salvador ou do interior (Chapada Diamantina).','Comida típica: acarajé, moqueca – evite estereótipos, vá com respeito.','Axé, samba-reggae e São João são assuntos quentes.']},
+      {uf:'CE',nome:'Ceará', dicas:[
+        'Fortaleza, Jericoacoara, Canoa Quebrada – litoral sempre conecta.','Humor cearense e vaquejada podem entrar com leveza.','Times: Ceará e Fortaleza (pergunte com respeito!).']},
+      {uf:'DF',nome:'Distrito Federal', dicas:[
+        'Brasília: superquadras, eixos, parques (Água Mineral).','Trânsito e burocracias federais como quebra-gelo.','Muitas pessoas são de outros estados – pergunte de onde veio.']},
+      {uf:'ES',nome:'Espírito Santo', dicas:[
+        'Moqueca capixaba vs baiana? Trate com humor respeitoso.','Vitória, Vila Velha e o Convento da Penha como ganchos.','Café e rochas ornamentais são temas profissionais comuns.']},
+      {uf:'GO',nome:'Goiás', dicas:[
+        'Goiânia e sertanejo/universitário rendem conexão.','Pequi e comida goiana – cite como curiosidade.','Agronegócio e chapadas (Veadeiros) como temas.']},
+      {uf:'MA',nome:'Maranhão', dicas:[
+        'Lençóis Maranhenses é sempre bom assunto.','Cultura do bumba meu boi e reggae maranhense.','Gastronomia: arroz de cuxá, juçara.']},
+      {uf:'MT',nome:'Mato Grosso', dicas:[
+        'Chapada dos Guimarães e calor forte – empatia.','Agronegócio e Pantanal mato-grossense.','Distâncias grandes entre cidades; logística é tema.']},
+      {uf:'MS',nome:'Mato Grosso do Sul', dicas:[
+        'Bonito e Pantanal rendem papo positivo.','Tereré e influência paraguaia são referências locais.','Campo Grande: ruas largas e qualidade de vida.']},
+      {uf:'MG',nome:'Minas Gerais', dicas:[
+        'Pão de queijo, café e hospitalidade mineira (sem clichê excessivo).','Cidades históricas (Ouro Preto, Tiradentes).','Futebol: Galo, Cruzeiro, América – cuidado para não polarizar.']},
+      {uf:'PA',nome:'Pará', dicas:[
+        'Belém, Círio de Nazaré – trate com respeito religioso.','Culinária forte: tacacá, açaí “raiz”, maniçoba.','Clima úmido e chuvas – mostre empatia.']},
+      {uf:'PB',nome:'Paraíba', dicas:[
+        'João Pessoa, pôr do sol do Jacaré; praias e segurança.','São João de Campina Grande.','Rapadura, buchada e artesanato local.']},
+      {uf:'PR',nome:'Paraná', dicas:[
+        'Curitiba e seu planejamento urbano.','Cataratas do Iguaçu; mate/ chimarrão em parte do estado.','Clima frio no interior – empatia.']},
+      {uf:'PE',nome:'Pernambuco', dicas:[
+        'Recife/Olinda, frevo e maracatu.','Porto de Galinhas e litoral sul.','Gastronomia: bolo de rolo, carne de sol.']},
+      {uf:'PI',nome:'Piauí', dicas:[
+        'Delta do Parnaíba e Parque Serra da Capivara.','Teresina e o calor intenso – empatia genuína.','Cultura: carnaubais, artesanato, forró.']},
+      {uf:'RJ',nome:'Rio de Janeiro', dicas:[
+        'Praias, Cristo, Pão de Açúcar – mas evite clichês forçados.','Trânsito e deslocamento: empatia na rotina.','Futebol (Fla/Flu/Bota/Vasco) com cuidado para não rivalizar.']},
+      {uf:'RN',nome:'Rio Grande do Norte', dicas:[
+        'Natal, Pipa e Genipabu – dunas e passeios.','Cajueiro de Pirangi como curiosidade.','Frutos do mar e calor litorâneo.']},
+      {uf:'RS',nome:'Rio Grande do Sul', dicas:[
+        'Chimarrão, churrasco e Serra Gaúcha – cite com respeito.','Dupla Gre-Nal (cuidado para não provocar).','Clima frio e trabalho no interior/agronegócio.']},
+      {uf:'RO',nome:'Rondônia', dicas:[
+        'Porto Velho, Madeira-Mamoré (história ferroviária).','Mistura cultural norte/nordeste/centro-oeste.','Cite calor e distâncias – empatia.']},
+      {uf:'RR',nome:'Roraima', dicas:[
+        'Boa Vista planejada, Monte Roraima.','Fronteira com Guiana/Venezuela – diversidade cultural.','Clima e logística peculiares – demonstre respeito.']},
+      {uf:'SC',nome:'Santa Catarina', dicas:[
+        'Praias, serra e Oktoberfest (Blumenau).','Colonização europeia e culinária variada.','Times locais e qualidade de vida nas cidades médias.']},
+      {uf:'SP',nome:'São Paulo', dicas:[
+        'Trânsito, trabalho e gastronomia do mundo todo.','Bairros e cidades do interior (Campinas, Ribeirão, Sorocaba).','Futebol (Corinthians/Palmeiras/São Paulo/Santos) – trate com leveza.']},
+      {uf:'SE',nome:'Sergipe', dicas:[
+        'Aracaju, orla bonita e qualidade de vida.','Cânion do Xingó e forró sergipano.','Caranguejo e culinária litorânea.']},
+      {uf:'TO',nome:'Tocantins', dicas:[
+        'Jalapão como cartão postal – águas e dunas.','Palmas e seu urbanismo recente.','Clima seco/quente – empatia real.']},
+    ];
+
+    const motivos = [
+      'Desemprego','Emprestou o nome','Pandemia/queda de renda','Divórcio/separação','Falência/fechou empresa','Doença na família','Golpe/estelionato','Atraso pontual que virou bola de neve','Emergência médica','Nascimento de filho','Morte na família','Dependência química na família','Mudança de cidade','Erro cadastral/negativação indevida','Compras impulsivas','Cartão estourado/rotativo','Consignado acumulado','Empréstimos múltiplos','Foi avalista','Atraso com aluguel','Atraso com escola dos filhos','Atraso com plano de saúde','MEI desorganizado','Autônomo sazonal','Perda de cliente-chave','Recuperação judicial','Crédito negado repetidas vezes','Endividamento bancário','Cheque especial/limite','Outros'
+    ];
+
+    const objetivos = [
+      'Financiamento de moto','Financiamento de carro','Financiamento de casa','Cartão de crédito','Empréstimo pessoal','Alugar imóvel','Abrir empresa/MEI','Aprovar limite no banco','Crediário em lojas','Conta de luz/água no nome','Plano de celular/TV','Financiar equipamento de trabalho','Vender no marketplace','Consórcio','Crédito rural','Cartão sem anuidade','Regularizar CNPJ','Outros'
+    ];
+
+    // Sugestões dinâmicas por motivo/objetivo
+    const empatiaPorMotivo = {
+      'Desemprego':'Sinto muito pelo período difícil. Vamos organizar tudo para você voltar a ter crédito e respirar aliviado, passo a passo. Eu cuido da burocracia, você foca em recomeçar.',
+      'Emprestou o nome':'Isso acontece mais do que parece, e dói mesmo. Sem julgamento: vamos concentrar no que dá pra resolver agora e blindar para não se repetir.',
+      'Pandemia/queda de renda':'Muita gente foi afetada. A boa notícia é que existem caminhos legais para limpar e reconstruir seu histórico.',
+      'Divórcio/separação':'Sei que é um turbilhão. A gente simplifica o financeiro para você tocar sua vida com mais paz.',
+      'Falência/fechou empresa':'Empreender é arriscar. Bora virar a página com estratégia e crédito saudável.',
+      'Doença na família':'Prioridade é saúde. Vamos aliviar o resto com um plano claro e prazos definidos.',
+      'Golpe/estelionato':'Lamento muito. Vamos verificar o que cabe de contestação e focar na limpeza do que travou seu CPF.',
+      'Atraso pontual que virou bola de neve':'Acontece rápido. A ideia é estancar agora e reorganizar pra não voltar.',
+      'Outros':'Obrigado por confiar em contar. Vamos tratar com respeito e foco em solução.'
+    }
+
+    const transicaoPorObjetivo = {
+      'Financiamento de moto':'Perfeito. Assim que seu nome estiver limpo, já te oriento a fortalecer score e renda comprovada para aprovar a moto sem dor de cabeça.',
+      'Financiamento de carro':'Ótimo. Com CPF regular e score subindo, fica bem mais viável buscar taxas melhores no carro.',
+      'Financiamento de casa':'Meta importante. Vamos limpar e preparar seu perfil financeiro para o crédito imobiliário.',
+      'Cartão de crédito':'Com o nome limpo, alinhamos bancos que liberam primeiro e como usar sem cair no rotativo.',
+      'Empréstimo pessoal':'Com a limpeza, avaliamos instituições com aprovação mais rápida e juros menores.',
+      'Alugar imóvel':'Nome limpo abre portas com imobiliárias e seguro-fiança. Te mostro como reforçar comprovação.',
+      'Abrir empresa/MEI':'Limpo o CPF e te mostro como começar o CNPJ já com perfil saudável.',
+      'Aprovar limite no banco':'Depois da limpeza, trabalhamos limites progressivos e relacionamento bancário.',
+      'Crediário em lojas':'Com o CPF ok, a aprovação em lojas melhora. Te passo a sequência certa para subir score.',
+      'Vender no marketplace':'Limpeza ajuda a abrir conta PJ/MEI e meios de pagamento sem bloqueios.',
+      'Consórcio':'Com nome limpo, a carta sai com menos atrito e melhor negociação.',
+      'Crédito rural':'Após limpar, organizamos documentos e renda para linhas específicas do agro.',
+      'Regularizar CNPJ':'Tirando os bloqueios no CPF, fica mais fácil ajustar pendências do CNPJ.',
+      'Outros':'Com o nome limpo, alinhamos os próximos passos para seu objetivo acontecer.'
+    }
+
+    // ====== ESTADO ======
+    const stateGrid = document.getElementById('stateGrid');
+    const stateTips = document.getElementById('stateTips');
+    const search = document.getElementById('search');
+
+    let selecionado = { estado:null, motivo:null, objetivo:null };
+    let passo = 1;
+
+    function renderEstados(filtro=''){
+      stateGrid.innerHTML='';
+      const lista = estados.filter(e=> (e.nome+e.uf+e.dicas.join(' ')).toLowerCase().includes(filtro.toLowerCase()));
+      lista.forEach(({uf,nome,dicas})=>{
+        const b=document.createElement('button');
+        b.className='state-btn';
+        b.innerHTML=`<strong>${nome}</strong><br><span class="muted">${uf}</span>`;
+        b.onclick=()=>{ selecionado.estado={uf,nome}; mostrarDicasEstado({uf,nome,dicas}); atualizarResumo(); };
+        stateGrid.appendChild(b);
+      });
+    }
+
+    function mostrarDicasEstado({uf,nome,dicas}){
+      stateTips.innerHTML='';
+      const head = document.createElement('div');
+      head.className='item';
+      head.innerHTML = `<h4>${nome} (${uf})</h4><div class="muted">Pautas de conexão:</div>`;
+      stateTips.appendChild(head);
+      dicas.forEach((d)=>{
+        const it=document.createElement('div');
+        it.className='item';
+        it.innerHTML=`<div>${d}</div>`;
+        stateTips.appendChild(it);
+      });
+      document.getElementById('aberturaBox').innerHTML = `Oi, tudo bem? Vi aqui que você é de <strong>${nome}</strong>. Eu adoro ${dicas[0].replace(/\.$/,'')} – e sei como é a rotina por aí. Podemos alinhar rapidinho como deixar seu CPF em ordem?`;
+    }
+
+    // ====== MOTIVOS ======
+    const motivosChips = document.getElementById('motivosChips');
+    const motivoSugestoes = document.getElementById('motivoSugestoes');
+
+    function renderMotivos(){
+      motivosChips.innerHTML='';
+      motivos.forEach(m=>{
+        const c=document.createElement('button');
+        c.className='chip'; c.textContent=m; c.onclick=()=>{selecionado.motivo=m; marcarChip(motivosChips,m); renderSugMotivo(m)};
+        motivosChips.appendChild(c);
+      })
+    }
+    function renderSugMotivo(m){
+      motivoSugestoes.innerHTML='';
+      const s = empatiaPorMotivo[m] || empatiaPorMotivo['Outros'];
+      const it=document.createElement('div');
+      it.className='item';
+      it.innerHTML = `<div class="muted">Fala empática:</div><div><strong>"${s}"</strong></div>`;
+      motivoSugestoes.appendChild(it);
+      document.getElementById('empatiaBox').innerHTML = s;
+      atualizarResumo();
+    }
+
+    // ====== OBJETIVOS ======
+    const objetivosChips = document.getElementById('objetivosChips');
+    const objetivoSugestoes = document.getElementById('objetivoSugestoes');
+
+    function renderObjetivos(){
+      objetivosChips.innerHTML='';
+      objetivos.forEach(o=>{
+        const c=document.createElement('button');
+        c.className='chip'; c.textContent=o; c.onclick=()=>{selecionado.objetivo=o; marcarChip(objetivosChips,o); renderSugObjetivo(o)};
+        objetivosChips.appendChild(c);
+      })
+    }
+    function renderSugObjetivo(o){
+      objetivoSugestoes.innerHTML='';
+      const s = transicaoPorObjetivo[o]||transicaoPorObjetivo['Outros'];
+      const it=document.createElement('div');
+      it.className='item';
+      it.innerHTML = `<div class="muted">Transição + CTA:</div><div><strong>"${s}"</strong></div>`;
+      objetivoSugestoes.appendChild(it);
+      document.getElementById('transicaoBox').innerHTML = s;
+      atualizarResumo();
+    }
+
+    // ====== NAVEGAÇÃO ======
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
+    const bar  = document.getElementById('bar');
+    const stepNum = document.getElementById('stepNum');
+    const sectionTitle = document.getElementById('sectionTitle');
+
+    function setPasso(n){
+      passo=n; stepNum.textContent=n;
+      const pcts = {1:'0%',2:'50%',3:'100%'}; bar.style.width=pcts[n];
+      document.getElementById('step1').style.display = n===1?'block':'none';
+      document.getElementById('step2').style.display = n===2?'block':'none';
+      document.getElementById('step3').style.display = n===3?'block':'none';
+      sectionTitle.textContent = n===1? '1) Escolha o estado do cliente'
+        : n===2? '2) Selecione o motivo da negativação'
+        : '3) Defina o objetivo do cliente com o nome limpo';
+    }
+
+    next.onclick=()=>{ if(passo<3) setPasso(passo+1) };
+    prev.onclick=()=>{ if(passo>1) setPasso(passo-1) };
+
+    document.addEventListener('keydown',e=>{
+      if(e.altKey && e.key==='ArrowRight') next.click();
+      if(e.altKey && e.key==='ArrowLeft') prev.click();
+    });
+
+    // ====== SELEÇÃO & PROMPT ======
+    function marcarChip(container, texto){
+      [...container.children].forEach(x=>x.classList.toggle('active', x.textContent===texto));
+    }
+
+    function atualizarResumo(){
+      const {estado,motivo,objetivo}=selecionado;
+      const partes=[];
+      if(estado) partes.push(`Estado: ${estado.nome} (${estado.uf})`);
+      if(motivo) partes.push(`Motivo: ${motivo}`);
+      if(objetivo) partes.push(`Objetivo: ${objetivo}`);
+      document.getElementById('resumoMini').textContent = partes.length? partes.join(' · ') : 'Nenhuma seleção ainda.';
+      gerarPromptIA();
+    }
+
+    function gerarPromptIA(){
+      const {estado,motivo,objetivo}=selecionado;
+      const e = estado? `${estado.nome} (${estado.uf})` : '—';
+      const m = motivo || '—';
+      const o = objetivo || '—';
+      const abertura = document.getElementById('aberturaBox').innerText || '';
+      const empatia  = document.getElementById('empatiaBox').innerText || '';
+      const trans    = document.getElementById('transicaoBox').innerText || '';
+      const prompt = `Atue como um consultor sênior da New Life criando um roteiro de ligação rápido (2 a 4 minutos) para gerar conexão e conversão.\n\nContexto:\n- Estado do cliente: ${e}\n- Motivo da negativação: ${m}\n- Objetivo com o nome limpo: ${o}\n\nPeças que já tenho (use como base e melhore):\n- Abertura contextualizada: ${abertura}\n- Frase de empatia: ${empatia}\n- Transição + CTA: ${trans}\n\nInstruções:\n1) Entregue um roteiro com: Abertura, Exploração rápida (3 perguntas-chave), Validação/Empatia, Explicação simples do processo, Provas sociais, Oferta e Fechamento com agenda de próximo passo.\n2) Use linguagem simples, segura, sem juridiquês, e mantenha tom humano.\n3) Adapte exemplos à realidade do estado informado.\n4) Sugira 2 variações de fechamento (cartão e boleto).\n5) Dê 3 respostas curtas para objeções comuns (preço, prazo, segurança).`;
+      document.getElementById('promptIA').value = prompt;
+    }
+
+    // ====== BUSCA ======
+    search.addEventListener('input',()=>{
+      renderEstados(search.value);
+    });
+
+    // ====== BOTÕES DE CÓPIA ======
+    const copiar = (id)=>{
+      const el=document.getElementById(id);
+      el.select(); el.setSelectionRange(0,99999);
+      document.execCommand('copy');
+    }
+    document.getElementById('copiarPrompt').onclick=()=>copiar('promptIA');
+    document.getElementById('btnCopiarResumo').onclick=()=>{
+      const txt = document.getElementById('resumoMini').textContent + "\n\nAbertura: " + (document.getElementById('aberturaBox').innerText||'') + "\nEmpatia: " + (document.getElementById('empatiaBox').innerText||'') + "\nTransição: " + (document.getElementById('transicaoBox').innerText||'');
+      navigator.clipboard.writeText(txt);
+      alert('Resumo copiado!');
+    }
+
+    // ====== PROMPT MESTRE (MODAL) ======
+    const modal = document.getElementById('modalPrompt');
+    const btnMaster = document.getElementById('btnPromptMaster');
+    const fecharModal = document.getElementById('fecharModal');
+    const promptMestre = document.getElementById('promptMestre');
+
+    btnMaster.onclick=()=>{ modal.style.display='block'; };
+    fecharModal.onclick=()=>{ modal.style.display='none'; };
+
+    promptMestre.value = `Você é um especialista em vendas por ligação da New Life. Gere um \"playbook de rapport e fechamento\" com base nos parâmetros que eu fornecer (estado do cliente, motivo da negativação e objetivo com nome limpo).\n\nEntregáveis obrigatórios:\n1) Abertura contextualizada ao estado (respeitosa, sem estereótipos).\n2) 3 perguntas de diagnóstico (rápidas) para entender contexto e urgência.\n3) Frase de empatia personalizada ao motivo da negativação.\n4) Explicação do processo New Life em 4 bullets (simples, sem juridiquês).\n5) 2 provas sociais curtas (estilo \"caso X\").\n6) Transição para o objetivo do cliente com CTA.\n7) 2 variações de fechamento (cartão e boleto) e reforço de segurança.\n8) 3 respostas curtas para objeções comuns (preço, prazo, segurança).\n\nFormato: títulos curtos, bullets enxutos e linguagem humana.`;
+
+    document.getElementById('copiarMestre').onclick=()=>{
+      promptMestre.select(); document.execCommand('copy'); alert('Prompt mestre copiado!');
+    }
+
+    // ====== INIT ======
+    renderEstados(); renderMotivos(); renderObjetivos(); setPasso(1);
+  </script>
 </body>
 </html>
